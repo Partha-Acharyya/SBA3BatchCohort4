@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p><a href="Transfer within the bank">Transfer within the bank</a></p>
-<p><a href="Transfer to other bank">Transfer within the bank</a></p>
+<p><a href="AddIBSBeneficiary.jsp">Transfer within the bank</a></p>
+
+<p><a href="AddNonIBSBeneficiary.jsp">Transfer to other bank</a></p>
 </body>
 </html>
