@@ -8,7 +8,6 @@
 </head>
 <body>
 <p><a href="AddIBSBeneficiary.jsp">Transfer within the bank</a></p>
-
 <p><a href="AddNonIBSBeneficiary.jsp">Transfer to other bank</a></p>
 </body>
 </html>
