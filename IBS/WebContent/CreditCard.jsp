@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Credit-Card</title>
 </head>
 <center>
 <body>
@@ -30,13 +30,13 @@
 		
 </form>
 <H1>Credit card Application Status</H1>
-<form action="CCStatus.jsp" method="post">
+<form action="CheckCCStatusServlet" method="post">
 
 		<table style="width: 80% , height:80%">
 			
 			<tr>
 				<td><label>Mobile Number</label></td>
-				<td><input type="number" name="MobileNumber" required/></td>
+				<td><input type="text" maxLength="10" pattern="[0-9]{10}$" title="Enter only digits" name="MobileNumber" required/></td>
 			</tr>
 			<tr>
 				<td><label>Email Id</label></td>

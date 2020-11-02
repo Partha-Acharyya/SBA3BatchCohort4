@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td><label>Mobile Number</label></td>
-				<td><input type="number" name="MobileNumber" required/></td>
+				<td><input type="text" maxLength="10" pattern="[0-9]{10}$" title="Enter only digits"  name="MobileNumber" required/></td>
 			</tr>
 			<tr>
 				<td><label>Email Id</label></td>

@@ -11,10 +11,10 @@ public class CreditCardEligibility {
 	private static String TypeOfEmployment;
 	private  static String TotalIncome;
 	private static String Email;
-	private static Date birthday;
+	private static String birthday;
 
 	public CreditCardEligibility(String firstName, String lastName, long mobileNumber, String typeOfEmployment,
-			String totalIncome, String email, java.util.Date birthday) {
+			String totalIncome, String email, String birthday) {
 		super();
 		FirstName = firstName;
 		LastName = lastName;
@@ -22,7 +22,7 @@ public class CreditCardEligibility {
 		TypeOfEmployment = typeOfEmployment;
 		TotalIncome = totalIncome;
 		Email = email;
-		CreditCardEligibility.birthday = (Date) birthday;
+		CreditCardEligibility.birthday =  birthday;
 	}
 	
 	public static String getFirstName() {
@@ -73,11 +73,11 @@ public class CreditCardEligibility {
 		Email = email;
 	}
 
-	public static java.util.Date getBirthday() {
+	public static String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		CreditCardEligibility.birthday = birthday;
 	}
 
