@@ -72,5 +72,28 @@
 		</table>
 		
 </form>
+
+<H1>Delete IBS Beneficiary</H1>
+<form action="AddIBSBeneficiary.jsp" method="post">
+
+		<table style="width: 80% , height:80%">
+			
+			<tr>
+<!-- 			    <td><input type="radio" name="Modify IBS Beneficiary" value="Modify IBS Beneficiary" checked>
+					    Modify IBS Beneficiary</td> -->
+				<td><label for="Accounts">Delete a Beneficiary</label></td>
+				<td><select name="Accounts">
+						<option value="Savings">Savings</option>
+						<option value="Credit Card">Credit Card</option>
+				</select></td> 
+			</tr>
+			
+			<tr>
+				<td><input type="submit" value="Delete" /></td>
+			</tr>
+			
+		</table>
+		
+</form>
 </body>
 </html>
