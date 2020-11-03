@@ -7,25 +7,11 @@
 <title>DebitCard</title>
 </head>
 <body>
-<H1>Debit Card Upgrade</H1>
-<form action="NewDCForm.jsp" method="post">
-
-		<table style="width: 80% , height:80%">
-			
-			<tr>
-				<td><label for="DCType">Select the type of Debit card to Upgrade</label></td>
-				<td><select name="DCType">
-						<option value="Gold">Gold</option>
-						<option value="Platinum">Platinum</option>
-						</select></td>
-			</tr>
-			
-			<tr>
-				<td><input type="submit" value="Apply Now" /></td>
-			</tr>
-			
-		</table>
-		
-</form>
+<center>
+<h2>Debit Card</h2>
+<h5>Debit Card Number: XXXX XXXX XXXX XX56</h5>
+<button><a href="BlockDebitCard.jsp" >Block/Unblock Debit card</a></button>
+<button><a href="GenerateDCPin.jsp" >Generate Debit card Pin</a></button>
+</center>
 </body>
 </html>

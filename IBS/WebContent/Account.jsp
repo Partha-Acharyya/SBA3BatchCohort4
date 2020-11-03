@@ -1,12 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>home</title>
-</head>
-<div class="Header">
-</div><center>
-<h1>Welcome to IBS Portal</h1> </center>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -76,9 +72,9 @@ body {
 </style>
 </head>
 <body>
-<center>
+
 <div class="navbar">
-  <a href="#">Home</a>
+  <a href="Account.jsp">Home</a>
    <div class="dropdown">
     <button class="dropbtn">Cards 
       <i class="fa fa-caret-down"></i>
@@ -89,33 +85,45 @@ body {
         </div>
   </div> 
   <div class="dropdown">
+    <button class="dropbtn">Benificiary Management 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="AddIBSBeneficiary.jsp">Add IBS Benificiary</a>
+      <a href="AddNonIBSBeneficiary.jsp" >Add non IBS Benificiary</a>
+       <a href="View Or Delete List Of Beneficiaries.jsp" >View Or Delete List Of Beneficiaries</a>
+        </div>
+  </div> 
+   <div class="dropdown">
+    <button class="dropbtn">Deposits 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="${pageContext.request.contextPath}/RecurringDeposit.jsp"> Recurring Deposit</a>
+      <a href="${pageContext.request.contextPath}/FixedDeposit.jsp" >Fixed Deposit</a>
+      
+        </div>
+  </div> 
+  <div class="dropdown">
     <button class="dropbtn">Loans 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
       <a href="${pageContext.request.contextPath}/OpenLoan.jsp"> Open a Loan</a>
+      <a href="${pageContext.request.contextPath}/PayEMI.jsp" >Pay Loan EMI</a>
+      <a href="${pageContext.request.contextPath}/GenerateStatement.jsp" >Generate Statement</a>
+      <a href="${pageContext.request.contextPath}/PreClosureRequest.jsp" >Request Pre-Closure</a>
         </div>
   </div> 
+  <a href="serviceprovider.jsp">Service Provider</a>
+  <a href="CreatePassword.jsp">Change Password</a>
+  
+  <a href="1stLogin.jsp">Sign Out</a>
+  
 </div>
 
-<form action="Account.jsp" method="post">
-	<br/>
-	<table>
-	<tr>
-		<td><label>Enter UID</label></td>
-		<td><input type="text" name="UID"/></td>
-	</tr>
-	<tr>
-		<td><label>Enter Password</label></td>
-		<td><input type="password" name="Pwd"/></td>
-	</tr>
-	<tr>
-		<td><input type="submit" value="Login"/></td>
-		<td><a href="Register.jsp">Please Register Here</a></td>
-	</tr>
-</div>
-	</table>
-</form>
-</center>
+<h3>Account summary</h3>
+<h5>Account Balance is INR: /-</h5>
+
 </body>
 </html>
