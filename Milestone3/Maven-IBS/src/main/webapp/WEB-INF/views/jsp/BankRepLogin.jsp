@@ -7,7 +7,10 @@
 <title>Bank Rep Login</title>
 </head>
 <body>
-<form action="BankRepresentativeHome.jsp" method="post">
+
+<jsp:include page="header.jsp"/>
+<div align="center">
+<form action="home" method="post">
 	<br/>
 	<table>
 	<tr>
@@ -25,5 +28,7 @@
 </div>
 	</table>
 </form>
+</div>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

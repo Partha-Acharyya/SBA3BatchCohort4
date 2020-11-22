@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>DebitCard</title>
+<title>CreditCard</title>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
 	<div align="center">
-		<H3>Block or Unblock Debit Card</H3>
-		<spring:form action="DebitCard" method="post" modelAttribute="DebitCard">
+		<H3>Block or Unblock Credit Card </H3>
+		<spring:form action="CreditCard" method="post" modelAttribute="CreditCard">
 
 			<table>
 <tr>
@@ -21,9 +21,9 @@
 												</spring:select></td>
 			</tr>
 				<tr>
-				<td><spring:label for="DCNumber" path="DCNumber">Select Debit Number</spring:label></td>
-				<td><spring:select name="DCNumber" path="DCNumber">
-						<spring:option value="DebitcardNum">4152</spring:option>
+				<td><spring:label for="CCNumber" path="CCNumber">Select Credit Number</spring:label></td>
+				<td><spring:select name="CCNumber" path="CCNumber">
+						<spring:option value="CreditcardNum">4152</spring:option>
 												</spring:select></td>
 			</tr>
 			
@@ -51,7 +51,7 @@
 					</spring:select></td>
 				</tr>
 				<tr>
-				<td><button  onClick="DebitCard" >Back</button></td>
+				<td><button  onClick="CreditCard" >Back</button></td>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>
 

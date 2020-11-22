@@ -8,61 +8,100 @@
 <meta charset="ISO-8859-1">
 <title>Credit-Card</title>
 <head>
-<link href="<core:url value="/resources/css/index.css" />" rel="stylesheet">
-
+<link href="<core:url value="/resources/css/index.css" />"
+	rel="stylesheet">
 </head>
-
 <body>
 	<div align="center">
 		<jsp:include page="header.jsp" />
-		<H1>Apply for Credit Card</H1>
-		<spring:form action="CCEligibility.jsp" method="post" modelAttribute="CreditCardEligibility">
+		<div class="navbar">
+			<a href="home">Home</a>
+			<div class="dropdown">
+				<button class="dropbtn">
+					Cards <i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="DebitCard">Debit Card</a> <a href="CreditCard">Credit
+						Card</a>
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">
+					Benificiary Management <i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="AddIBSBeneficiary">Add IBS Beneficiary</a> <a
+						href="AddnonIBSBeneficiary">Add non IBS Beneficiary</a> <a
+						href="ViewOrDeleteListOfBeneficiaries">View Or Delete List Of
+						Beneficiaries</a>
 
-			<table>
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">
+					Deposits <i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/RecurringDeposit.jsp">
+						Recurring Deposit</a> <a
+						href="${pageContext.request.contextPath}/FixedDeposit.jsp">Fixed
+						Deposit</a>
 
-				<tr>
-					<td><spring:label path="CCType">Select credit card type to apply</spring:label></td>
-					<td><spring:select path="CCType" name="CCType">
-							<spring:option value="Classic" label="Classic" />
-							<spring:option value="Gold" label="Gold" />
-							<spring:option value="Platinum" label="Platinum" />
-						</spring:select></td>
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">
+					Loans <i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="${pageContext.request.contextPath}/OpenLoan.jsp"> Open
+						a Loan</a> <a href="${pageContext.request.contextPath}/PayEMI.jsp">Pay
+						Loan EMI</a> <a
+						href="${pageContext.request.contextPath}/GenerateStatement.jsp">Generate
+						Statement</a> <a
+						href="${pageContext.request.contextPath}/PreClosureRequest.jsp">Request
+						Pre-Closure</a>
+				</div>
+			</div>
+			<a href="serviceprovider.jsp">Service Provider</a> <a
+				href="CreatePassword.jsp">Change Password</a> <a href="index.html">Sign
+				Out</a>
+
+		</div>
+
+		<div align="center">
+			<h2>Credit Card</h2>
+			<b style="color: blue;">Service Requests</b>
+
+			<table style="width: 897px;" class="table">
+				<tr align="justify">
+					<td colspan="2" width="299" valign="top" class="td"><a class="adc"
+						href="CCApply">Apply Now</a></td>
+
 				</tr>
-
-				<tr>
-					<td><input type="submit" value="Apply Now" /></td>
+				<tr align="justify">
+					<td width="299" valign="top" class="td"><a class="adc"
+						href="BlockCreditCard">Block/Unblock card</a></td>
+					<td width="299" valign="top" class="td"><a class="adc"
+						href="ResetCCPin">Reset Pin</a></td>
 				</tr>
-
+				<tr>
+					<td width="299" valign="top" class="td"><a class="adc"
+						href="RequestCCStatement">Request card statement</a></td>
+					<td width="299" valign="top" class="td"><a class="adc"
+						href="CCStatementmismatch">Report statement mismatch</a></td>
+				</tr>
 			</table>
 
-		</spring:form>
-		<H1>Credit card Application Status</H1>
-		<form action="CheckCCStatusServlet" method="post" modelAttribute="student">
 
-			<table>
-
-				<tr>
-					<td><spring:label path="MobileNumber">Mobile Number</spring:label></td>
-					<td><spring:input path="MobileNumber" type="number"
-							name="MobileNumber" /></td>
-				</tr>
-				<tr>
-					<td><spring:label path="Email">Email Id</spring:label></td>
-					<td><spring:input path="CCTEmailype" type="email" name="Email" /></td>
-				</tr>
-				<tr>
-					<td><spring:label path="ReferenceId">Reference ID</spring:label></td>
-					<td><spring:input path="ReferenceId" type="text"
-							name="ReferenceId" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="Submit" /></td>
-				</tr>
-
-			</table>
-		</form>
+			<div align="center">
+				<p class="DCupgrade">
+					<a href="CreditCardUpgrade">Click Here</a> to upgrade your existing
+					card
+				</p>
+			</div>
+		</div>
 		<jsp:include page="footer.jsp" />
-	</div>
 </body>
 
 </html>

@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td><input type="submit" value="Login" /></td>
-					<td><a href="WEB-INF/views/jsp/BankRepLogin.jsp">Login as a Bank
+					<td><a href="admin/login">Login as a Bank
 							Rep</a></td>
 				</tr>
 				</div>

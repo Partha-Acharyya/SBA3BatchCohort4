@@ -25,9 +25,10 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="AddIBSBeneficiary.jsp">Add IBS Benificiary</a>
-      <a href="AddNonIBSBeneficiary.jsp" >Add non IBS Benificiary</a>
-       <a href="View Or Delete List Of Beneficiaries.jsp" >View Or Delete List Of Beneficiaries</a>
+     <a href="AddIBSBeneficiary">Add IBS Beneficiary</a>
+      <a href="AddnonIBSBeneficiary" >Add non IBS Beneficiary</a>
+       <a href="ViewOrDeleteListOfBeneficiaries" >View Or Delete List Of Beneficiaries</a>
+
         </div>
   </div> 
    <div class="dropdown">
