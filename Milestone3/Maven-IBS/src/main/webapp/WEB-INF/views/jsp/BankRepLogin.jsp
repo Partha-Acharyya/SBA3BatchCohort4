@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,24 +11,24 @@
 
 <jsp:include page="header.jsp"/>
 <div align="center">
-<form action="home" method="post">
+<spring:form action="home" method="post" modelAttribute="Adminuser">
 	<br/>
 	<table>
 	<tr>
-		<td><label>Enter Bank Login ID</label></td>
-		<td><input type="text" name="UID"/></td>
+		<td><spring:label path="adminuser">Enter Bank Login ID</spring:label></td>
+		<td><spring:input path="adminuser" type="text" name="adminuser"/></td>
 	</tr>
 	<tr>
-		<td><label>Enter Password</label></td>
-		<td><input type="password" name="Pwd"/></td>
+		<td><spring:label path="adminpassword">Enter Password</spring:label></td>
+		<td><spring:input path="adminpassword" type="password" name="adminpassword"/></td>
 	</tr>
 	<tr>
 		<td><input type="submit" value="Login"/></td>
 		
 	</tr>
-</div>
+
 	</table>
-</form>
+</spring:form>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>

@@ -5,6 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.wf.spring.ibs.model.*;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+
 
 @Controller
 @RequestMapping("/user")
@@ -120,6 +124,32 @@ public class UserController {
 	@RequestMapping("/ViewOrDeleteListOfBeneficiaries") 
 	public String ViewOrDeleteListOfBeneficiaries() {
 		return "ViewOrDeleteListOfBeneficiaries";
+	}
+	@RequestMapping("/newRegister") 
+	public String newRegister(Model NewUser) {
+		NewUser newuser= new NewUser();
+		NewUser.addAttribute("newuser", newuser);
+		return "Register";
+	}
+	
+	@RequestMapping("/registrationcheck") 
+	public String registrationcheck(@ModelAttribute NewUser newuser) {
+		//Business logic
+		return "UnregisteredCust";
+	}
+	@RequestMapping(value = "/loans", method = RequestMethod.GET)
+	public ModelAndView loans() {
+		return new ModelAndView("OpenLoan", "command", new LoanDto());
+	}
+
+	@RequestMapping(value = "/payemi", method = RequestMethod.GET)
+	public ModelAndView emi() {
+		return new ModelAndView("PayEMI", "command", new LoanDto());
+	}
+	
+	@RequestMapping(value = "/generateStatement", method = RequestMethod.GET)
+	public ModelAndView generateStatement() {
+		return new ModelAndView("GenerateStatement", "command", new LoanDto());
 	}
 
 

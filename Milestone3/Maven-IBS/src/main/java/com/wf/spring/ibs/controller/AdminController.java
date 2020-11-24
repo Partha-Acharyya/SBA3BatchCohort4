@@ -9,18 +9,25 @@ import com.wf.spring.ibs.model.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@RequestMapping("/login")
-	public String login() {
+	@RequestMapping("/BankRepLogin")
+	public String BankRepLogin(Model model) {
+
+		Adminuser Adminuser = new Adminuser();
+
+		model.addAttribute("Adminuser", Adminuser);
 		return "BankRepLogin";
 	}
+
 	@RequestMapping("/home")
 	public String home() {
 		return "BankRepresentativeHome";
 	}
+
 	@RequestMapping("/ApproveDeclineCardRequest")
 	public String ApproveDeclineCard() {
 		return "ApproveDeclineCardRequest";
 	}
+
 	@RequestMapping("/ActivateDeactivateCard")
 	public String ActivateDeactivateCard() {
 		return "ActivateDeactivateCard";

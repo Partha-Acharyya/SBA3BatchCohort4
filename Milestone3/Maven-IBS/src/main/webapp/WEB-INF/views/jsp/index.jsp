@@ -51,7 +51,8 @@
       <a href="Views/jsp/OpenLoan.jsp"> Open a Loan</a>
         </div>
   </div>  -->
-			<a href="/views/jsp/Register.jsp">Register Here</a>
+			<a href="user/newRegister">Register Here</a>
+	
 		</div>
 
 		<form action="user/home" method="post">
@@ -67,7 +68,7 @@
 				</tr>
 				<tr>
 					<td><input type="submit" value="Login" /></td>
-					<td><a href="admin/login">Login as a Bank
+					<td><a href="admin/BankRepLogin">Login as a Bank
 							Rep</a></td>
 				</tr>
 				</div>
