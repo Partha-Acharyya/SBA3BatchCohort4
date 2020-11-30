@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.wf.bootapp.ibs.entity.CreditCard;
 import com.wf.bootapp.ibs.entity.account;
-import com.wf.bootapp.ibs.entity.recurringDeposit;
+import com.wf.bootapp.ibs.entity.miniStatement;
 
 @Repository
-public interface userRepository extends JpaRepository<account, Long>{
-	List<account> findByCustomerId(Long customerId);
-
+public interface miniStatementRepository extends JpaRepository<miniStatement, Long>{
+	List<miniStatement> findByCustId(Long custId);
 	
 }
+
+

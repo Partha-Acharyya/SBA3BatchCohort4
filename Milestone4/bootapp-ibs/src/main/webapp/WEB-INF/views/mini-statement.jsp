@@ -16,20 +16,16 @@
 </head>
 
 <body>
-
-	<div id="wrapper">
-		<div id="header">
-			<h2>IBS - Integrated Banking System</h2>
-		</div>
-	</div>
+<jsp:include page="header.jsp" />
 	
-	<div id="container">
+	
+	<div align="center" id="container">
 		<h3>Mini Statement </h3>
 		<div id="content">
-		<h6>Last Five Trasactions </h6>
+		<h6>Last Five Transactions </h6>
 			<!--  add our html table here -->
 		
-			<table>
+			<table id="table">
 				<tr>
 					<th>Transaction ID</th>
 					<th>Customer ID</th>
@@ -39,13 +35,13 @@
 				</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var="trans" items="${miniStatement}">
+				<c:forEach begin="0" end="4" var="trans" items="${miniStatement}">
 							
 					<tr>
-						<td> ${trans.id} </a></td>
-						<td> ${trans.custId} </td>
+						<td> ${trans.id} </td>
+						<td> ${trans.custId}</td>
 						<td> ${trans.createDate} </td>
-						<td> ${trans.transType} </td>
+						<td> <c:out value="${trans.transType eq 'C' ? 'Credit': 'Debit'}"/>  </td>
 						<td> ${trans.amount} </td>
 					</tr>
 				
@@ -54,10 +50,10 @@
 			</table>
 				
 		</div>
-	
 	</div>
 	
-
+	
+<jsp:include page="footer.jsp" />
 </body>
 
 </html>

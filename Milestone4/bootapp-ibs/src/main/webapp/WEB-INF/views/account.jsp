@@ -44,9 +44,9 @@
 					Deposits <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="${pageContext.request.contextPath}/user/RecurringDeposit">
+					<a href="${pageContext.request.contextPath}/user/recurringDeposit">
 						Recurring Deposit</a> <a
-						href="${pageContext.request.contextPath}/user/FixedDeposit">Fixed
+						href="${pageContext.request.contextPath}/user/fixedDeposit">Fixed
 						Deposit</a>
 
 				</div>
@@ -86,7 +86,7 @@
 				</tr>
 				<tr align="justify">
 					<td width="299" valign="top" class="td"><a class="adc"
-						 href="${pageContext.request.contextPath}/user/ministatement">Request
+						 href="${pageContext.request.contextPath}/user/mini-statement">Request
 			Mini Statement</a></td>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/periodicstatement">Request
@@ -94,7 +94,7 @@
 				</tr>
 				<tr>
 					<td width="299" valign="top" class="td"><a class="adc"
-						href="${pageContext.request.contextPath}/user/transferfunds">Transfer
+						href="${pageContext.request.contextPath}/user/trans-form">Transfer
 			funds</a></td>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/payutilitybills">Pay

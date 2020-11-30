@@ -26,24 +26,26 @@
 	</div>
 	
 	<div id="container" align="center">
-		<h3>Balance Summary of ${Id}</h3>
+		<h5>Balance Summary of Account- ${Id}</h5>
 	
 		<div id="content">
 
 			<!--  add our html table here -->
 		
-			<table>
+			<table id="table">
+			<thead>
 				<tr>
 					<th>Account Type</th>
 					<th>Balance</th>
 				</tr>
-				
+				</thead>
 				<!-- loop over and print our customers -->
 				<c:forEach var="balan" items="${accountBalance}">
 					<tr>
-						<td> ${balan.accountType} </td>
-						<td> ${balan.balance} </td>
+						<td> <c:out value="${balan.accountType eq 'C' ? 'Current': 'Savings'}"/> </td>
+						<td> INR ${balan.balance} </td>
 					</tr>
+					
 				
 				</c:forEach>
 						

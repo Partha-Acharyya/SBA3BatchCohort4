@@ -10,8 +10,6 @@ import com.wf.bootapp.ibs.entity.account;
 import com.wf.bootapp.ibs.entity.recurringDeposit;
 
 @Repository
-public interface userRepository extends JpaRepository<account, Long>{
-	List<account> findByCustomerId(Long customerId);
-
-	
+public interface rdRepository extends JpaRepository<recurringDeposit, Long>{
+		
 }

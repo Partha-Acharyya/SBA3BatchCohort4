@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class account {
 	@Id
- int accountNumber;
+ Long accountNumber;
 
  Long customerId;
  char accountType ; 
@@ -18,11 +18,11 @@ public class account {
 	
 }
 
-public int getAccountNumber() {
+public Long getAccountNumber() {
 	return accountNumber;
 }
 
-public void setAccountNumber(int accountNumber) {
+public void setAccountNumber(Long accountNumber) {
 	this.accountNumber = accountNumber;
 }
 
