@@ -18,12 +18,14 @@ public class CreditCardEligibilityInputDto {
 	@Length(min=3 , max=50)
 	private String lastName;
 	@NotNull
-	//@Length(min=10 , max=10)
 	private long mobileNumber;
 	private String typeOfEmployment;
+	@NotEmpty
 	private String totalIncome;
 	@Email
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String birthday;
 	private  String ccType;
 

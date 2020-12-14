@@ -21,6 +21,7 @@ public class CreditCardEligibility {
 	private String birthday;
 	private  String ccType;
 	private String status;
+	private Long customerId;
 	public Long getReferenceID() {
 		return referenceID;
 	}
@@ -81,6 +82,12 @@ public class CreditCardEligibility {
 	}
 	public void setCcType(String ccType) {
 		this.ccType = ccType;
+	}
+	public Long getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	
 

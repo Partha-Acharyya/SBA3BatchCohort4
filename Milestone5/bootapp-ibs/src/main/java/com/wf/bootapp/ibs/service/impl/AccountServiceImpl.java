@@ -1,5 +1,6 @@
 package com.wf.bootapp.ibs.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import com.wf.bootapp.ibs.repository.TransferRepository;
 import com.wf.bootapp.ibs.repository.UserRepository;
 import com.wf.bootapp.ibs.service.AccountService;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import com.wf.bootapp.ibs.repository.MiniStatementRepository;
 import com.wf.bootapp.ibs.entity.*;
@@ -72,9 +74,8 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<MiniStatement> fetchAlltransactions(Long CustId) {
-		
-		List<MiniStatement> miniStatement = this.miniStatementRepository.findByCustId(CustId);
-		
+		 List<MiniStatement> miniStatement = this.miniStatementRepository.findByCustId(CustId);		
+		Collections.sort(miniStatement,Collections.reverseOrder());
 		return miniStatement;
 	}
 	@Autowired

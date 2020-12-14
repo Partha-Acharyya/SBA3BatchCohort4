@@ -115,8 +115,8 @@
 					Cards <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="ApproveDeclineCardRequest">Approve or Decline Card
-						Request</a> <a href="ActivateDeactivateCard">Activate or
+					<a href="${pageContext.request.contextPath}/admin/ApproveDeclineCard">Approve or Decline Card
+						Request</a> <a href="${pageContext.request.contextPath}/admin/ActivateDeactivateCard">Activate or
 						Deactivate Card</a>
 				</div>
 			</div>
