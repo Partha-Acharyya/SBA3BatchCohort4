@@ -10,8 +10,8 @@ import com.wf.bootapp.ibs.entity.Customer;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<Account, Long>{
-	List<Account> findByCustomerId(Long CustomerId);
+public interface NewUserRepository extends JpaRepository<Customer, Long>{
+	List<Customer> findByCustomerId(Long id);
 
 	
 }

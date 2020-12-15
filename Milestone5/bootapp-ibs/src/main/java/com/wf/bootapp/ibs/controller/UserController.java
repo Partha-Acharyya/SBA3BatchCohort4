@@ -27,7 +27,10 @@ import com.wf.bootapp.ibs.entity.Account;
 
 import com.wf.bootapp.ibs.service.AccountService;
 import com.wf.bootapp.ibs.service.CreditCardService;
+import com.wf.bootapp.ibs.service.UserService;
 import com.wf.bootapp.ibs.dto.LoanDto;
+import com.wf.bootapp.ibs.dto.Newuser;
+import com.wf.bootapp.ibs.dto.Newuseroutput;
 import com.wf.bootapp.ibs.dto.RdInputDto;
 import com.wf.bootapp.ibs.dto.RdOutputDto;
 import com.wf.bootapp.ibs.entity.*;
@@ -45,6 +48,8 @@ public class UserController {
 	@Autowired
 	private CreditCardService CreditCardService;
 	
+	@Autowired
+	private UserService Userservice;
 
 	@RequestMapping("/home")
 	public String home() {
@@ -61,6 +66,16 @@ public class UserController {
 		CreditCardEligibilityInputDto creditCardEligibilityinputDto = new CreditCardEligibilityInputDto();
 		model.addAttribute("creditCardEligibilityInputDto", creditCardEligibilityinputDto);
 		return "CCApply";
+	}
+	
+	@RequestMapping("/newregistration")
+	public String newregistration(@Valid @ModelAttribute Newuser newuser, BindingResult result, Model model){
+		if (result.hasErrors()) {
+			return "Register";
+		}
+		Newuseroutput newuseroutput= this.Userservice.saveCustomer(newuser);
+		model.addAttribute("newuseroutputdto", newuseroutput);
+		return "UnregisteredCust";
 	}
 
 	@RequestMapping("/CCApplysuccess")

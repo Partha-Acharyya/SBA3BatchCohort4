@@ -23,33 +23,43 @@
 </head>
 <body>
 <h2>Please provide below Details</h2>
-<spring:form action="user/registrationcheck" method="post" modelAttribute="newuser">
+<spring:form action="newregistration" method="post" modelAttribute="newuser">
 	<br/>
 	<table style="width: 80% , height:80%">
 	
 	<tr>
-		<td><spring:label path="Name">Name: </spring:label></td>
-		<td><spring:input path="Name" type="text" name="name" required/></td>
+		<td><spring:label path="firstName">FirstName: </spring:label></td>
+		<td><spring:input path="firstName" type="text" name="firstName" required/></td>
 	</tr>
 	
 	<tr>
-		<td><spring:label path="Email">Email: </spring:label></td>
-		<td><spring:input path="Email" type="email" name="email" required/></td>
+		<td><spring:label path="lastName">LastName: </spring:label></td>
+		<td><spring:input path="lastName" type="text" name="lastName" required/></td>
 	</tr>
 	
 	<tr>
-		<td><spring:label path="ContactNumber">Contact Number: </spring:label></td>
-		<td><spring:input path="ContactNumber" type="number" name="ContactNum" required/></td>
+		<td><spring:label path="email">Email: </spring:label></td>
+		<td><spring:input path="email" type="email" name="email" required/></td>
 	</tr>
 	
 	<tr>
-		<td><spring:label path="Address">Address: </spring:label></td>
-		<td><spring:input path="Address" type="text" name="Address" required/></td>
+		<td><spring:label path="mobileNumber">Contact Number: </spring:label></td>
+		<td><spring:input path="mobileNumber" type="number" name="ContactNum" required/></td>
 	</tr>
 	
 	<tr>
-		<td><spring:label path="DOB">Date of Birth: </spring:label></td>
-		<td><spring:input path="DOB" type="date" name="DOB" placeholder="dd-mm-yyyy" required/></td>
+		<td><spring:label path="city">City: </spring:label></td>
+		<td><spring:input path="city" type="text" name="city" required/></td>
+	</tr>
+	
+	<tr>
+		<td><spring:label path="location">State: </spring:label></td>
+		<td><spring:input path="location" type="text" name="location" required/></td>
+	</tr>
+	
+	<tr>
+		<td><spring:label path="birthday">Date of Birth: </spring:label></td>
+		<td><spring:input path="birthday" type="date" name="DOB" placeholder="dd-mm-yyyy" required/></td>
 	</tr>
 	
 	<tr>

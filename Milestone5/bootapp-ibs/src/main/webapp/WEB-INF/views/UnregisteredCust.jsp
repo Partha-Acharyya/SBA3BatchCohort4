@@ -22,7 +22,7 @@
 
 %>
 
-<h1 class="registrationMsg">Your registration is completed with Reference ID: ${newuser.ReferenceID }.
+<h1 class="registrationMsg">Your registration is completed with Reference ID: ${newuser.id}.
 A bank representative will contact you with details</h1>
 <br>
 <div class="homeredirect"><a href="index.html">Go to login Page</a></div>
