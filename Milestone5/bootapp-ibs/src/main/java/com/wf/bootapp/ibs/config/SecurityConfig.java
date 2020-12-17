@@ -28,7 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 				.antMatchers("/user/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/css/**").permitAll()
-				.antMatchers("/Register").permitAll()
+				.antMatchers("/images/**").permitAll()
+				.antMatchers("/newregistration").permitAll()
+				.antMatchers("/UnregisteredCust").permitAll()
+				
 				.anyRequest()				
 				.authenticated().and().formLogin().loginPage("/login-form").loginProcessingUrl("/validate").permitAll()
 				.and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/access-denied");

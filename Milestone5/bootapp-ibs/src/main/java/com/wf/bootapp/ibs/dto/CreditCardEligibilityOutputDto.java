@@ -14,6 +14,7 @@ public class CreditCardEligibilityOutputDto {
 	private String status;
 	private String typeOfEmployment;
 	private String totalIncome;
+	private Long customerId;
 	public String getStatus() {
 		return status;
 	}
@@ -68,6 +69,14 @@ public class CreditCardEligibilityOutputDto {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 

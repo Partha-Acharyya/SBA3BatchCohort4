@@ -13,7 +13,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	
+
 	<security:authorize access="hasRole('USER')">
 		<div class="navbar">
 			<a href="${pageContext.request.contextPath}/user/home">Home</a>
@@ -32,9 +32,9 @@
 					Benificiary Management <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="AddIBSBeneficiary">Add IBS Beneficiary</a> <a
-						href="AddnonIBSBeneficiary">Add non IBS Beneficiary</a> <a
-						href="ViewOrDeleteListOfBeneficiaries">View Or Delete List Of
+					<a href="${pageContext.request.contextPath}/user/AddBeneficiary">Add IBS Beneficiary</a> <a
+						href="${pageContext.request.contextPath}/user/AddNonIBSBeneficiary">Add non IBS Beneficiary</a> <a
+						href="${pageContext.request.contextPath}/user/ViewOrDeleteListOfBeneficiaries">View Or Delete List Of
 						Beneficiaries</a>
 
 				</div>
@@ -57,9 +57,12 @@
 				</button>
 				<div class="dropdown-content">
 
-					<a href="${pageContext.request.contextPath}/user/loans"> Open a Loan</a> <a href="payemi">Pay Loan EMI</a>
-					<a href="${pageContext.request.contextPath}/user/generateStatement">Generate Statement</a> <a
-						href="${pageContext.request.contextPath}/user/precolosure">Request Pre-Closure</a>
+					<a href="${pageContext.request.contextPath}/user/loans"> Open a
+						Loan</a> <a href="payemi">Pay Loan EMI</a> <a
+						href="${pageContext.request.contextPath}/user/generateStatement">Generate
+						Statement</a> <a
+						href="${pageContext.request.contextPath}/user/precolosure">Request
+						Pre-Closure</a>
 
 				</div>
 			</div>
@@ -74,34 +77,38 @@
 
 		</div>
 		<div align="center">
-		
-		<h3>Welcome <security:authentication property="principal.username"/></h3>
-		
-		<table style="width: 897px;" class="table">
+
+			<h3>
+				Welcome
+				<security:authentication property="principal.username" />
+			</h3>
+
+			<table style="width: 897px;" class="table">
 				<tr align="justify">
-				 	<td colspan="2" width="299" valign="top" class="td"><a class="adc"
+					<td colspan="2" width="299" valign="top" class="td"><a
+						class="adc"
 						href="${pageContext.request.contextPath}/user/balance-check">Balance
-			Check</a></td>  
+							Check</a></td>
 
 				</tr>
 				<tr align="justify">
 					<td width="299" valign="top" class="td"><a class="adc"
-						 href="${pageContext.request.contextPath}/user/mini-statement">Request
-			Mini Statement</a></td>
+						href="${pageContext.request.contextPath}/user/mini-statement">Request
+							Mini Statement</a></td>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/periodicstatement">Request
-			for Periodic Statement</a></td>
+							for Periodic Statement</a></td>
 				</tr>
 				<tr>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/trans-form">Transfer
-			funds</a></td>
+							funds</a></td>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/payutilitybills">Pay
-			Utility bills</a></td>
+							Utility bills</a></td>
 				</tr>
 			</table>
-		
+
 		</div>
 	</security:authorize>
 
@@ -115,9 +122,11 @@
 					Cards <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="${pageContext.request.contextPath}/admin/ApproveDeclineCard">Approve or Decline Card
-						Request</a> <a href="${pageContext.request.contextPath}/admin/ActivateDeactivateCard">Activate or
-						Deactivate Card</a>
+					<a
+						href="${pageContext.request.contextPath}/admin/ApproveDeclineCard">Approve
+						or Decline Card Request</a> <a
+						href="${pageContext.request.contextPath}/admin/ActivateDeactivateCard">Activate
+						or Deactivate Card</a>
 				</div>
 			</div>
 
@@ -133,12 +142,12 @@
 			</div>
 			<a href="CreatePassword.jsp">Change Password</a>
 		</div>
-<div align="right">
-				<spring:form action="${pageContext.request.contextPath}/logout"
-					method="POST">
-					<input type="submit" value="Logout">
-				</spring:form>
-			</div>
+		<div align="right">
+			<spring:form action="${pageContext.request.contextPath}/logout"
+				method="POST">
+				<input type="submit" value="Logout">
+			</spring:form>
+		</div>
 	</security:authorize>
 
 	<jsp:include page="footer.jsp" />

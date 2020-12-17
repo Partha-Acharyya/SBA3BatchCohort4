@@ -34,7 +34,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="Login" /></td>
-				<td><a href="${pageContext.request.contextPath}/Register">Register Here</a></td>
+				<td><a href="${pageContext.request.contextPath}/newregistration">Register Here</a></td>
 			</tr>
 
 		</table>

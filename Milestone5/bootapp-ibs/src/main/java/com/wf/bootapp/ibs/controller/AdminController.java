@@ -31,9 +31,9 @@ public class AdminController {
 		return "ApproveDeclineCard";
 	}
 	
-	@RequestMapping("/ApproveCardRequest/{id}")
-	private String ApproveCardRequest(@PathVariable Long id,Model model) {		
-		CreditCardEligibilityOutputDto creditCardEligibilityOutputDto= this.creditCardService.ApproveCardRequest(id);
+	@RequestMapping("/ApproveCardRequest/{id}/{customerId}")
+	private String ApproveCardRequest(@PathVariable Long id,@PathVariable Long customerId,Model model) {		
+		CreditCardEligibilityOutputDto creditCardEligibilityOutputDto= this.creditCardService.ApproveCardRequest(id,customerId);
 		model.addAttribute("creditCardEligibilityOutputDto", creditCardEligibilityOutputDto);
 		List<CreditCardEligibilityOutputDto> ccEligibilities= this.creditCardService.getAllCcEligibilities();
 		model.addAttribute("ccEligibilities", ccEligibilities);

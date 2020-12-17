@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Range;
 
 public class CardDto {
 	@NotNull
-	private Long CardNumber;
+	private Long cardNumber;
 	
 	private String blockingType;
 	
@@ -20,14 +20,20 @@ public class CardDto {
 	private String stmtCycle;
 	@NotNull
 	@Range(min = 3, max = 3)
-	private int CardCVV;
+	private int cardCvv;
 	@NotNull
 	@Range(min = 4, max = 4)
-	private int CardPin;
+	private int cardPin;
 	@NotNull
 	private Long customerID;
 	private String mismatchFile;
-	
+	private  String cardType;
+	public Long getCardNumber() {
+		return cardNumber;
+	}
+	public void setCardNumber(Long cardNumber) {
+		this.cardNumber = cardNumber;
+	}
 	public String getBlockingType() {
 		return blockingType;
 	}
@@ -52,24 +58,17 @@ public class CardDto {
 	public void setStmtCycle(String stmtCycle) {
 		this.stmtCycle = stmtCycle;
 	}
-	
-	public Long getCardNumber() {
-		return CardNumber;
+	public int getCardCvv() {
+		return cardCvv;
 	}
-	public void setCardNumber(Long cardNumber) {
-		CardNumber = cardNumber;
-	}
-	public int getCardCVV() {
-		return CardCVV;
-	}
-	public void setCardCVV(int cardCVV) {
-		CardCVV = cardCVV;
+	public void setCardCvv(int cardCvv) {
+		this.cardCvv = cardCvv;
 	}
 	public int getCardPin() {
-		return CardPin;
+		return cardPin;
 	}
 	public void setCardPin(int cardPin) {
-		CardPin = cardPin;
+		this.cardPin = cardPin;
 	}
 	public Long getCustomerID() {
 		return customerID;
@@ -82,6 +81,14 @@ public class CardDto {
 	}
 	public void setMismatchFile(String mismatchFile) {
 		this.mismatchFile = mismatchFile;
+	}
+	
+	
+	public String getCardType() {
+		return cardType;
+	}
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
 	}
 	
 }

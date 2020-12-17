@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,38 +10,39 @@
 <title>CreditCard</title>
 </head>
 <body>
+
 	<jsp:include page="header.jsp" />
 	<div align="center">
 		<H3>Reset Credit Card Pin</H3>
 		<spring:form
-			action="${pageContext.request.contextPath}/user/CreditCard"
-			method="post" modelAttribute="CardDto">
+			action="ResetPinSuccess" method="post" modelAttribute="CardDto">
 			<table>
 				<tr>
-					<td><spring:label for="CardNumber" path="CardNumber">Select Credit Number</spring:label></td>
-					<td><spring:select name="CardNumber" path="CardNumber">
-							<spring:options items="${CardDto.CardNumber}" />
-						</spring:select> <spring:errors path="CardNumber" cssClass="error" /> </td>
+					<td><spring:label for="cardNumber" path="cardNumber">Select Credit Number</spring:label></td>
+					<td><spring:select name="cardNumber" path="cardNumber">
+							<c:forEach var="CardDto" items="${CardDto1}">
+
+								<spring:option value="${CardDto.cardNumber}">${CardDto.cardNumber}</spring:option>
+							</c:forEach>
+						</spring:select> <spring:errors path="cardNumber" cssClass="error" /></td>
+
 				</tr>
 				<tr>
-					<td><spring:label path="CardCVV">Credit card CVV</spring:label></td>
-					<td><spring:input type="text" path="CardCVV" maxLength="3"
-							pattern="[0-9]{3}$" title="Enter only 3 digits" name="CardCVV" />
-						<spring:errors path="CardCVV" cssClass="error" /></td>
+					<td><spring:label path="cardCvv">Credit card CVV</spring:label></td>
+					<td><spring:input type="text" path="cardCvv"  name="cardCvv" />
+						<spring:errors path="cardCvv" cssClass="error" /></td>
 				</tr>
 				<tr>
-					<td><spring:label path="CardPin">Credit card pin</spring:label></td>
-					<td><spring:input path="CardPin" type="text" maxLength="4"
-							pattern="[0-9]{4}$" title="Enter only 4 digits" name="CardPin" />
-						<spring:errors path="CardPin" cssClass="error" /></td>
+					<td><spring:label path="cardPin">Credit card pin</spring:label></td>
+					<td><spring:input path="cardPin" type="password"  name="cardPin" />
+						<spring:errors path="cardPin" cssClass="error" /></td>
 				</tr>
 
-				<tr>
-					<td><spring:label path="CardPin">Confirm Credit card pin</spring:label></td>
-					<td><spring:input path="CardPin" type="text" maxLength="4"
-							pattern="[0-9]{4}$" title="Enter only 4 digits" name="CardPin" />
-						<spring:errors path="CardPin" cssClass="error" /></td>
-				</tr>
+				 <tr>
+					<td><spring:label path="cardPin">Confirm Credit card pin</spring:label></td>
+					<td><spring:input path="cardPin"  type="password" name="cardPin" />
+						<spring:errors path="cardPin" cssClass="error" /></td>
+				</tr> 
 				<tr>
 					<td><button
 							onClick="${pageContext.request.contextPath}/user/CreditCard">Back</button></td>

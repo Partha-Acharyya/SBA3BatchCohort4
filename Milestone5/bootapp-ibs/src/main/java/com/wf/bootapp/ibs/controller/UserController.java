@@ -15,22 +15,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.wf.bootapp.ibs.dto.AddBeneficiaryInputDto;
+import com.wf.bootapp.ibs.dto.AddBeneficiaryOutputDto;
 import com.wf.bootapp.ibs.dto.CardDto;
+import com.wf.bootapp.ibs.dto.CardOutputDto;
 import com.wf.bootapp.ibs.dto.CreditCardEligibilityInputDto;
 import com.wf.bootapp.ibs.dto.CreditCardEligibilityOutputDto;
 import com.wf.bootapp.ibs.entity.Account;
 
 import com.wf.bootapp.ibs.service.AccountService;
 import com.wf.bootapp.ibs.service.CreditCardService;
+import com.wf.bootapp.ibs.service.DebitCardService;
 import com.wf.bootapp.ibs.service.UserService;
 import com.wf.bootapp.ibs.dto.LoanDto;
-import com.wf.bootapp.ibs.dto.Newuser;
-import com.wf.bootapp.ibs.dto.Newuseroutput;
+import com.wf.bootapp.ibs.dto.NewUser;
+import com.wf.bootapp.ibs.dto.NewUserOutput;
 import com.wf.bootapp.ibs.dto.RdInputDto;
 import com.wf.bootapp.ibs.dto.RdOutputDto;
 import com.wf.bootapp.ibs.entity.*;
@@ -49,16 +55,27 @@ public class UserController {
 	private CreditCardService CreditCardService;
 	
 	@Autowired
-	private UserService Userservice;
-
+	private DebitCardService DebitCardService;
+	
+	
+	
 	@RequestMapping("/home")
-	public String home() {
-		return "Account";
+	public String userhome() {
+	
+		return "account";
 	}
 
 	@RequestMapping("/CreditCard")
 	public String CreditCard() {
 		return "CreditCard";
+	}
+	@RequestMapping("/DebitCard")
+	public String DebitCard(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "DebitCard";
 	}
 
 	@RequestMapping("/CCApply")
@@ -66,16 +83,6 @@ public class UserController {
 		CreditCardEligibilityInputDto creditCardEligibilityinputDto = new CreditCardEligibilityInputDto();
 		model.addAttribute("creditCardEligibilityInputDto", creditCardEligibilityinputDto);
 		return "CCApply";
-	}
-	
-	@RequestMapping("/newregistration")
-	public String newregistration(@Valid @ModelAttribute Newuser newuser, BindingResult result, Model model){
-		if (result.hasErrors()) {
-			return "Register";
-		}
-		Newuseroutput newuseroutput= this.Userservice.saveCustomer(newuser);
-		model.addAttribute("newuseroutputdto", newuseroutput);
-		return "UnregisteredCust";
 	}
 
 	@RequestMapping("/CCApplysuccess")
@@ -92,32 +99,49 @@ public class UserController {
 	}
 	
 	@RequestMapping("/blockUnblockCreditCard")
-	public String blockUnblockCreditCard() {
-		Long id = Long.parseLong(getLoggedInUserName());	
+	public String blockUnblockCreditCard(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
 		return "BlockCreditCard";
 		
 	}
+	@RequestMapping("/blockUnblockCreditCardsuccess")
+	public String blockUnblockCreditCardsuccess( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.CreditCardService.BlockUnblockCard(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "blockUnblockCreditCardsuccess";	
+	}
 	@RequestMapping("/ResetCCPin")
-	public String ResetCCPin(ModelMap model) {
-		Long id = Long.parseLong(getLoggedInUserName());	
-		List<CardDto> cardDto=this.CreditCardService.CreditCardList(id);
-		
-		model.put("cardDto",cardDto);	
-		
+	public String ResetCCPin(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
 		return "ResetCCPin";
 		
 	}
 	
-	@RequestMapping("/ResetCCPinSubmit")
-	public String resetCcPin(@Valid @ModelAttribute CardDto CardDto,
-			BindingResult result, Model model) {
-		//Long id = Long.parseLong(getLoggedInUserName());
-		if (result.hasErrors()) {
-			return "ResetCCPin";
-		}
-		
-		return "ResetCCPinSubmit";	
+	@RequestMapping("/ResetPinSuccess")
+	public String resetCcPin( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.CreditCardService.resetCcPin(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "ResetPinSuccess";	
 	}
+
 	@RequestMapping("/requestCcStatement")
 	public String requestCcStatement() {
 		return "RequestCCStatement";	
@@ -126,6 +150,190 @@ public class UserController {
 	public String ccStatementMismatch() {
 		return "CCStatementmismatch";	
 	}
+	
+	@RequestMapping("CreditCardUpgrade")
+	public String CreditCardUpgrade(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "CreditCardUpgrade";
+		
+	}
+	@RequestMapping("/CreditCardUpgrade_success")
+	public String CreditCardUpgrade_success( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.CreditCardService.creditCardUpgrade(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "CreditCardUpgrade_success";	
+	}
+	
+	@RequestMapping("/blockUnblockDebitCard")
+	public String blockUnblockDebitCard(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "BlockDebitCard";
+		
+	}
+	@RequestMapping("/blockUnblockDebitCardsuccess")
+	public String blockUnblockDebitCardsuccess( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.DebitCardService.BlockUnblockCard(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "blockUnblockDebitCardsuccess";	
+	}
+	@RequestMapping("/ResetDcPin")
+	public String ResetDCPin(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "ResetDCPin";
+		
+	}
+	
+	@RequestMapping("/ResetDcPinSuccess")
+	public String resetDcPin( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.DebitCardService.resetDcPin(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "ResetDcPinSuccess";	
+	}
+
+	@RequestMapping("/requestDcStatement")
+	public String requestDcStatement(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "RequestDCStatement";	
+	}
+	@RequestMapping("/dcStatementMismatch")
+	public String DCStatementMismatch(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "DCStatementmismatch";	
+	}
+	@RequestMapping("/DCStatementMismatch_Success")
+	public String dcStatementMismatch_Success(@ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.DebitCardService.dcStatementMismatch(CardDto,id);
+		if(!(CardOutputDto.getMismatchFile()).isEmpty())
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "DCStatementMismatch_Success";	
+	}
+	
+	@RequestMapping("DebitCardUpgrade")
+	public String DebitCardUpgrade(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
+		return "DebitCardUpgrade";
+		
+	}
+	@RequestMapping("/DebitCardUpgrade_success")
+	public String DebitCardUpgrade_success( @ModelAttribute CardDto CardDto,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		System.out.println(CardDto.getCardNumber());
+//		if (result.hasErrors()) {
+//			return "ResetCCPin";
+//		}
+		CardOutputDto CardOutputDto=this.DebitCardService.debitCardUpgrade(CardDto,id);
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "DebitCardUpgrade_success";	
+	}
+	@RequestMapping("/AddBeneficiary")
+	public String addIBSBeneficiary(Model model) {
+		Long customerId = Long.parseLong(getLoggedInUserName());
+		AddBeneficiaryInputDto addBeneficiaryInputDto = new AddBeneficiaryInputDto();
+		model.addAttribute("AddBeneficiaryInputDto", addBeneficiaryInputDto);
+		List<AddBeneficiaryOutputDto> ibsBeneficiaries = this.accountService.getAllibsBeneficiaries(customerId);
+		model.addAttribute("ibsBeneficiaries", ibsBeneficiaries);
+		return "AddBeneficiary";
+	}
+
+	@RequestMapping("/BeneficiaryAddedSuccessfully")
+	public String addIBSBeneficiary(@ModelAttribute AddBeneficiaryInputDto addBeneficiaryInputDto, Model model) {
+		Long customerId = Long.parseLong(getLoggedInUserName());
+		/*
+		 * if (result.hasErrors()) { return "AddBeneficiary"; }
+		 */
+		AddBeneficiaryOutputDto addBeneficiaryOutputDto = this.accountService.addBeneficiary(addBeneficiaryInputDto,
+				customerId);
+		model.addAttribute("addBeneficiaryOutputDto", addBeneficiaryOutputDto);
+		return "BeneficiaryAddedSuccessfully";
+	}
+
+	
+	 @RequestMapping("/ViewOrDeleteListOfBeneficiaries") 
+	 public String viewOrDeleteListOfBeneficiaries(Model model) { 
+		 Long customerId = Long.parseLong(getLoggedInUserName());
+	     AddBeneficiaryInputDto addBeneficiaryInputDto = new AddBeneficiaryInputDto();
+	     model.addAttribute("AddBeneficiaryInputDto", addBeneficiaryInputDto); 
+		List<AddBeneficiaryOutputDto> ibsBeneficiaries = this.accountService.getAllibsBeneficiaries(customerId);
+		model.addAttribute("ibsBeneficiaries", ibsBeneficiaries);
+	     return "ViewOrDeleteListOfBeneficiaries"; 
+	 }
+
+	@RequestMapping("/BeneficiaryDeletedSuccessfully")
+	public String viewOrDeleteListOfBeneficiaries(@ModelAttribute AddBeneficiaryInputDto addBeneficiaryInputDto,
+			Model model) {
+		Long customerId = Long.parseLong(getLoggedInUserName());
+		/*
+		 * if (result.hasErrors()) { return "ViewOrDeleteListOfBeneficiaries"; }
+		 */
+		AddBeneficiaryOutputDto addBeneficiaryOutputDto = this.accountService.addBeneficiary(addBeneficiaryInputDto,
+				customerId);
+		model.addAttribute("addBeneficiaryOutputDto", addBeneficiaryOutputDto);
+		return "BeneficiaryDeletedSuccessfully";
+	}
+
+	@RequestMapping("/AddNonIBSBeneficiary")
+	public String addNonIBSBeneficiary(Model model) {
+		AddBeneficiaryInputDto addBeneficiaryInputDto = new AddBeneficiaryInputDto();
+		model.addAttribute("AddBeneficiaryInputDto", addBeneficiaryInputDto);
+		return "AddNonIBSBeneficiary";
+	}
+
+	@RequestMapping("/NonIBSBeneficiaryAddedSuccessfully")
+	public String addNonIBSBeneficiary(@ModelAttribute AddBeneficiaryInputDto addBeneficiaryInputDto, Model model) {
+		Long customerId = Long.parseLong(getLoggedInUserName());
+		/*
+		 * if (result.hasErrors()) { return "AddBeneficiary"; }
+		 */
+		AddBeneficiaryOutputDto addBeneficiaryOutputDto = this.accountService.addBeneficiary(addBeneficiaryInputDto,
+				customerId);
+		model.addAttribute("addBeneficiaryOutputDto", addBeneficiaryOutputDto);
+		return "NonIBSBeneficiaryAddedSuccessfully";
+	}
+
+
 	@RequestMapping(value = "/balance-check", method = RequestMethod.GET)
 	public String balanceCheck(ModelMap model) {
 		model.put("Id", getLoggedInUserName());
@@ -202,7 +410,7 @@ public class UserController {
 	public ModelAndView preClosureRequest() {
 		return new ModelAndView("PreClosureRequest", "command", new LoanDto());
 	}
-
+	
 	private String getLoggedInUserName() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -211,5 +419,6 @@ public class UserController {
 		}
 		return principal.toString();
 	}
+
 
 }

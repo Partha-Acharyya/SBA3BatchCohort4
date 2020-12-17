@@ -1,6 +1,6 @@
 package com.wf.bootapp.ibs.dto;
 
-public class Newuseroutput {
+public class NewUserOutput {
 	private Long id;
 	private String firstName;
 	private String lastName;

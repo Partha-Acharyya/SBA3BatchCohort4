@@ -6,16 +6,17 @@ import javax.validation.constraints.NotBlank;
 
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 
-public class Newuser {
+public class NewUser {
 	@NotBlank(message = "First Name is required!")
 	private String firstName;
 	@NotBlank(message = "Last Name is required!")
 	private String lastName;
 	@Email
 	private String email;
-	@Length(max = 10, min = 10)
+	@Range(max = 10, min = 10)
 	private Long mobileNumber;
 	private String city;
 	private String birthday;

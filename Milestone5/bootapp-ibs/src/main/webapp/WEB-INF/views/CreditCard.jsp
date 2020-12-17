@@ -80,7 +80,7 @@
 				</tr>
 				<tr align="justify">
 					<td width="299" valign="top" class="td"><a class="adc"
-						href="${pageContext.request.contextPath}/user/BlockCreditCard">Block/Unblock card</a></td>
+						href="${pageContext.request.contextPath}/user/blockUnblockCreditCard">Block/Unblock card</a></td>
 					<td width="299" valign="top" class="td"><a class="adc"
 						href="${pageContext.request.contextPath}/user/ResetCCPin">Reset Pin</a></td>
 				</tr>

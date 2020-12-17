@@ -17,19 +17,22 @@
 
 	<div align="center">
 		<H3>Credit Card Upgrade</H3>
-		<spring:form action="CreditCard" method="post"
-			modelAttribute="CreditCard">
+		<spring:form action="CreditCardUpgrade_success" method="post"
+			modelAttribute="CardDto">
 
 			<table>
 				<tr>
-					<td><spring:label for="CCNumber" path="CCNumber">Select Credit Number</spring:label></td>
-					<td><spring:select name="CCNumber" path="CCNumber">
-							<spring:option value="CreditCardNum">4152</spring:option>
-						</spring:select></td>
+					<td><spring:label for="cardNumber" path="cardNumber">Select Credit Number</spring:label></td>
+					<td><spring:select name="cardNumber" path="cardNumber">
+							<c:forEach var="CardDto" items="${CardDto1}">
+
+								<spring:option value="${CardDto.cardNumber}">${CardDto.cardNumber}</spring:option>
+							</c:forEach>
+						</spring:select> <spring:errors path="cardNumber" cssClass="error" /></td>
 				</tr>
 				<tr>
-					<td><spring:label for="CCType" path="CCType">Select the type of Credit card to Upgrade</spring:label></td>
-					<td><spring:select name="CCType" path="CCType">
+					<td><spring:label for="ccType" path="ccType">Select the type of Credit card to Upgrade</spring:label></td>
+					<td><spring:select name="ccType" path="ccType">
 							<spring:option value="Gold">Gold</spring:option>
 							<spring:option value="Platinum">Platinum</spring:option>
 						</spring:select></td>

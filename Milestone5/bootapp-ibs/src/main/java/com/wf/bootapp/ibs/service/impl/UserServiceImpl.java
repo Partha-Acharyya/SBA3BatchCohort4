@@ -4,19 +4,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.wf.bootapp.ibs.dto.Newuser;
-import com.wf.bootapp.ibs.dto.Newuseroutput;
+import com.wf.bootapp.ibs.dto.NewUser;
+import com.wf.bootapp.ibs.dto.NewUserOutput;
 import com.wf.bootapp.ibs.entity.Customer;
 import com.wf.bootapp.ibs.repository.NewUserRepository;
 import com.wf.bootapp.ibs.repository.UserRepository;
 import com.wf.bootapp.ibs.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private NewUserRepository repository;
 	
-	private Customer convertUserInputDtotoEntity(Newuser usertoregister){
+	private Customer convertUserInputDtotoEntity(NewUser usertoregister){
 		Customer newCustomer= new Customer();
 		newCustomer.setBirthday(usertoregister.getBirthday());
 		newCustomer.setCity(usertoregister.getCity());
@@ -29,8 +31,8 @@ public class UserServiceImpl implements UserService{
 		return newCustomer;
 	}
 	
-	private Newuseroutput convertUserEntitytoOutputDto(Customer user){
-		Newuseroutput registeruser= new Newuseroutput();
+	private NewUserOutput convertUserEntitytoOutputDto(Customer user){
+		NewUserOutput registeruser= new NewUserOutput();
 		registeruser.setBirthday(user.getBirthday());
 		registeruser.setCity(user.getCity());
 		registeruser.setEmail(user.getEmail());
@@ -44,32 +46,33 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<Newuseroutput> fetchAllCustomers() {
+	public List<NewUserOutput> fetchAllCustomers() {
 		List<Customer> customers= this.repository.findAll();
 		
-		List<Newuseroutput> newuseroutputdto= customers.stream().map(this:: convertUserEntitytoOutputDto)
+		List<NewUserOutput> newuseroutputdto= customers.stream().map(this:: convertUserEntitytoOutputDto)
 											  .collect(Collectors.toList());
 		return newuseroutputdto;
 	}
 
 	@Override
-	public Newuseroutput fetchSingleCustomer(Long id) {
+	public NewUserOutput fetchSingleCustomer(Long id) {
 		if(this.repository.existsById(id)) {
 			Customer customer = this.repository.findById(id).orElse(null);
-			Newuseroutput newuseroutput = this.convertUserEntitytoOutputDto(customer);
+			NewUserOutput newuseroutput = this.convertUserEntitytoOutputDto(customer);
 			return newuseroutput;
 		}
 		return null;
 	}
 
 	@Override
-	public Newuseroutput saveCustomer(Newuser newuser) {
+	public NewUserOutput saveCustomer(NewUser newuser) {
 		// convert input dto to entity
 		Customer cust= this.convertUserInputDtotoEntity(newuser);
 		// save into DB, returns newly added record
 		Customer newcust= this.repository.save(cust);
+		System.out.println(newcust.getCity());
 		// convert entity to dto 
-		Newuseroutput newuseroutput = this.convertUserEntitytoOutputDto(newcust);
+		NewUserOutput newuseroutput = this.convertUserEntitytoOutputDto(newcust);
 		return newuseroutput;
 	}
 	

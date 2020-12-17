@@ -22,46 +22,48 @@
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp" />
+<div align="center">
 <h2>Please provide below Details</h2>
-<spring:form action="newregistration" method="post" modelAttribute="newuser">
+<spring:form action="${pageContext.request.contextPath}/UnregisteredCust" method="post" modelAttribute="Newuser">
 	<br/>
-	<table style="width: 80% , height:80%">
+	<table>
 	
 	<tr>
 		<td><spring:label path="firstName">FirstName: </spring:label></td>
-		<td><spring:input path="firstName" type="text" name="firstName" required/></td>
+		<td><spring:input path="firstName" type="text" name="firstName" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="lastName">LastName: </spring:label></td>
-		<td><spring:input path="lastName" type="text" name="lastName" required/></td>
+		<td><spring:input path="lastName" type="text" name="lastName" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="email">Email: </spring:label></td>
-		<td><spring:input path="email" type="email" name="email" required/></td>
+		<td><spring:input path="email" type="text" name="email" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="mobileNumber">Contact Number: </spring:label></td>
-		<td><spring:input path="mobileNumber" type="number" name="ContactNum" required/></td>
+		<td><spring:input path="mobileNumber" type="number" name="mobileNumber" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="city">City: </spring:label></td>
-		<td><spring:input path="city" type="text" name="city" required/></td>
+		<td><spring:input path="city" type="text" name="city" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="location">State: </spring:label></td>
-		<td><spring:input path="location" type="text" name="location" required/></td>
+		<td><spring:input path="location" type="text" name="location" /></td>
 	</tr>
 	
 	<tr>
 		<td><spring:label path="birthday">Date of Birth: </spring:label></td>
-		<td><spring:input path="birthday" type="date" name="DOB" placeholder="dd-mm-yyyy" required/></td>
+		<td><spring:input path="birthday" type="date" name="birthday" /></td>
 	</tr>
-	
+	<!-- 
 	<tr>
 		<td><label>Upload Proof of Address: </label></td>
 		<td><input type="file" name="AddressProof" /></td>
@@ -70,14 +72,14 @@
 	<tr>
 		<td><label>Upload Birth Certificate: </label></td>
 		<td><input type="file" name="BirthCert" /></td>
-	</tr>
-	
-	<tr></tr>
-	
+	</tr> -->
+
 	<tr>
-		<td><input type="submit" value="Register" class="submit"/></td>
+		<td><input type="submit" value="Register"/></td>
 	</tr>
 	</table>
 </spring:form>
+</div>
+<jsp:include page="footer.jsp" />
 </body>
 </html>
