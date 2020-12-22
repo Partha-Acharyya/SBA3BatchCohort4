@@ -10,6 +10,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<jsp:include page="navbar.jsp" />
 	<div align="center">
 		<spring:form action="${pageContext.request.contextPath}/user/DCStatementMismatch_Success" method="post"
 			modelAttribute="CardDto">

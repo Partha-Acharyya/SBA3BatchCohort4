@@ -14,7 +14,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
+<jsp:include page="navbar.jsp" />
 	<div align="center">
 		<H3>Credit Card Upgrade</H3>
 		<spring:form action="CreditCardUpgrade_success" method="post"
@@ -31,8 +31,8 @@
 						</spring:select> <spring:errors path="cardNumber" cssClass="error" /></td>
 				</tr>
 				<tr>
-					<td><spring:label for="ccType" path="ccType">Select the type of Credit card to Upgrade</spring:label></td>
-					<td><spring:select name="ccType" path="ccType">
+					<td><spring:label for="cardType" path="cardType">Select the type of Credit card to Upgrade</spring:label></td>
+					<td><spring:select name="cardType" path="cardType">
 							<spring:option value="Gold">Gold</spring:option>
 							<spring:option value="Platinum">Platinum</spring:option>
 						</spring:select></td>

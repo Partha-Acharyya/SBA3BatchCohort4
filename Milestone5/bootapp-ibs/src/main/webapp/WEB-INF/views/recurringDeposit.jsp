@@ -13,6 +13,7 @@
 <body>
 <div align="center">
 <jsp:include page="header.jsp" />
+<jsp:include page="navbar.jsp" />
 <spring:form action="rd-confirm" method="post"
 			modelAttribute="rdInputDto">
 

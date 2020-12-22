@@ -15,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
+<jsp:include page="navbar.jsp" />
 	<div align="center">
 
 

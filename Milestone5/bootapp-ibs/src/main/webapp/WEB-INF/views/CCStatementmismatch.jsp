@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,31 +10,30 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<jsp:include page="navbar.jsp" />
 	<div align="center">
+		<spring:form action="${pageContext.request.contextPath}/user/CCStatementMismatch_Success" method="post"
+			modelAttribute="CardDto">
+			<h3>Report Debit Card Statement Mismatch</h3>
 
-		<h3>Report Credit Card Statement Mismatch</h3>
-		<spring:form action="CreditCard" method="post" modelAttribute="CreditCard">
 			<table>
 
 				<tr>
-					<td><spring:label for="AccNumber" path="AccNumber">Select Account Number</spring:label></td>
-					<td><spring:select name="AccNumber" path="AccNumber">
-							<spring:option value="AccNumber">635623</spring:option>
-						</spring:select></td>
+					<td><spring:label for="cardNumber" path="cardNumber">Select CreditCard Number</spring:label></td>
+					<td><spring:select name="cardNumber" path="cardNumber">
+							<c:forEach var="CardDto" items="${CardDto1}">
+
+								<spring:option value="${CardDto.cardNumber}">${CardDto.cardNumber}</spring:option>
+							</c:forEach>
+						</spring:select> <spring:errors path="cardNumber" cssClass="error" /></td>
 				</tr>
 				<tr>
-					<td><spring:label for="CCNumber" path="CCNumber">Select Credit Number</spring:label></td>
-					<td><spring:select name="CCNumber" path="CCNumber">
-							<spring:option value="CreditcardNum">4152</spring:option>
-						</spring:select></td>
-				</tr>
-				<tr>
-					<td><spring:label path="MismatchFile">Upload Statement Mismatch</spring:label></td>
-					<td><spring:input type="file" path="MismatchFile" /></td>
+					<td><spring:label path="mismatchFile">Upload Statement Mismatch</spring:label></td>
+					<td><spring:input type="file" path="mismatchFile" /></td>
 				</tr>
 
 				<tr>
-					<td><button onClick="CreditCard">Back</button></td>
+					<td><button onClick="${pageContext.request.contextPath}/user/CredittCard">Back</button></td>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>
 

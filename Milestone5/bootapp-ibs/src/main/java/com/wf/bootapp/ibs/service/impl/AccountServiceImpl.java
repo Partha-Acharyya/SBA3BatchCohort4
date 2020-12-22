@@ -144,6 +144,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<AddBeneficiaryOutputDto> getAllibsBeneficiaries(Long customerId) {
 		List<AddBeneficiary> ibsBeneficiaries = this.addBeneficiaryRepository.findByCustomerId(customerId);
+		
 		List<AddBeneficiaryOutputDto> AddBeneficiaryOutputDto = ibsBeneficiaries.stream()
 				.map(this::convertAddBeneficiaryEntityToOutputDto).collect(Collectors.toList());
 		return AddBeneficiaryOutputDto;

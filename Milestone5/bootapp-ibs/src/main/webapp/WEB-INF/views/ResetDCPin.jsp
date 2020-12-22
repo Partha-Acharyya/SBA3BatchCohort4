@@ -12,10 +12,11 @@
 <body>
 
 	<jsp:include page="header.jsp" />
+	<jsp:include page="navbar.jsp" />
 	<div align="center">
 		<H3>Reset Debit Card Pin</H3>
 		<spring:form
-			action="ResetDcPinSuccess" method="post" modelAttribute="CardDto">
+			action="${pageContext.request.contextPath}/user/ResetDcPinSuccess" method="post" modelAttribute="CardDto">
 			<table>
 				<tr>
 					<td><spring:label for="cardNumber" path="cardNumber">Select Debit Card Number</spring:label></td>

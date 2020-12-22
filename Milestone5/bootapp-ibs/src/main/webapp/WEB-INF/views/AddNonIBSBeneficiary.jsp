@@ -13,6 +13,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+<jsp:include page="navbar.jsp" />
 <H1>Add a Non IBS Beneficiary</H1>
 <spring:form action="NonIBSBeneficiaryAddedSuccessfully" method="post" modelAttribute="AddBeneficiaryInputDto">
 

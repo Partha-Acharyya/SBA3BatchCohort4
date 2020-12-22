@@ -13,6 +13,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
+	<jsp:include page="navbar.jsp" />
 	<div align="center">
 	<H3>Add a Beneficiary</H3>
 		<spring:form action="BeneficiaryAddedSuccessfully" method="post"

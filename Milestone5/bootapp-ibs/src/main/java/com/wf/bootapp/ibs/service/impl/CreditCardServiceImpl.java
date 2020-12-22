@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import com.wf.bootapp.ibs.dto.CardOutputDto;
 import com.wf.bootapp.ibs.dto.CreditCardStatementDto;
 import com.wf.bootapp.ibs.entity.Card;
 import com.wf.bootapp.ibs.entity.CreditCardEligibility;
+import com.wf.bootapp.ibs.entity.DebitCard;
 import com.wf.bootapp.ibs.repository.CreditCardEligibilityRepository;
 import com.wf.bootapp.ibs.repository.DebitCardRepository;
 import com.wf.bootapp.ibs.repository.CardRepository;
@@ -102,15 +105,10 @@ public class CreditCardServiceImpl implements CreditCardService {
 
 	@Override
 	public List<CreditCardStatementDto> requestCardStatement(CardDto creditCardInputDto, Long id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
-	@Override
-	public boolean statementMismatch(CardDto creditCardInputDto, Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public CardOutputDto creditCardUpgrade(CardDto creditCardInputDto, Long id) {
@@ -190,5 +188,15 @@ public class CreditCardServiceImpl implements CreditCardService {
 		CreditCardEligibilityOutputDto CreditCardEligibilityOutputDto = this
 				.convertEntityToCcOutputDto(newCreditCardEligibility);
 		return CreditCardEligibilityOutputDto;
+	}
+
+	@Override
+	public CardOutputDto ccStatementMismatch(CardDto cardDto, Long id) {
+		Card card = this.CardRepository.findBycardNumber(cardDto.getCardNumber());
+		card.setMismatchFile(cardDto.getMismatchFile());
+		Card newcard = this.CardRepository.save(card);
+		CardOutputDto CardOutputDto = this.ConvertEntityToCardOuptuDto(newcard);
+		return CardOutputDto;
+		
 	}
 }

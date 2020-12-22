@@ -58,7 +58,7 @@
 				<div class="dropdown-content">
 
 					<a href="${pageContext.request.contextPath}/user/loans"> Open a
-						Loan</a> <a href="payemi">Pay Loan EMI</a> <a
+						Loan</a> <a href="${pageContext.request.contextPath}/user/payemi">Pay Loan EMI</a> <a
 						href="${pageContext.request.contextPath}/user/generateStatement">Generate
 						Statement</a> <a
 						href="${pageContext.request.contextPath}/user/precolosure">Request

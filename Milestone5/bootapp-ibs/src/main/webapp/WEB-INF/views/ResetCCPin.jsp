@@ -12,6 +12,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
+	<jsp:include page="navbar.jsp" />
 	<div align="center">
 		<H3>Reset Credit Card Pin</H3>
 		<spring:form

@@ -9,6 +9,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+<jsp:include page="navbar.jsp" />
 <div align="center">
 		<H3>Request DebitCard Statement</H3>
 		<spring:form action="DebitCard" method="post" modelAttribute="DebitCard">

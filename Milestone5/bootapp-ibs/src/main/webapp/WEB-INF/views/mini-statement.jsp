@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="header.jsp" />
 	
-	
+	<jsp:include page="navbar.jsp" />
 	<div align="center" id="container">
 		<h3>Mini Statement </h3>
 		<div id="content">

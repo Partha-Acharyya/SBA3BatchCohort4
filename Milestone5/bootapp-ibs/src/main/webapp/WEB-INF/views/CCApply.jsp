@@ -21,6 +21,7 @@
 <body>
 	<div align="center">
 		<jsp:include page="header.jsp" />
+		<jsp:include page="navbar.jsp" />
 		<h3>CREDIT CARD ELIGIBILITY FORM</h3>
 		<spring:form action="CCApplysuccess" method="post"
 			modelAttribute="creditCardEligibilityInputDto" >

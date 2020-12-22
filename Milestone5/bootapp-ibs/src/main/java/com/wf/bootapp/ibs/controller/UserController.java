@@ -108,13 +108,15 @@ public class UserController {
 		
 	}
 	@RequestMapping("/blockUnblockCreditCardsuccess")
-	public String blockUnblockCreditCardsuccess( @ModelAttribute CardDto CardDto,
+	public String blockUnblockCreditCardsuccess(@Valid @ModelAttribute ("CardDto")CardDto CardDto,BindingResult result,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		System.out.println(CardDto.getCardNumber());
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
-//		}
+		if (result.hasErrors()) {
+			List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+			model.addAttribute("CardDto1", CardDto1);
+			return "BlockCreditCard";
+		}
 		CardOutputDto CardOutputDto=this.CreditCardService.BlockUnblockCard(CardDto,id);
 		model.addAttribute("CardOutputDto",CardOutputDto);
 		return "blockUnblockCreditCardsuccess";	
@@ -130,13 +132,15 @@ public class UserController {
 	}
 	
 	@RequestMapping("/ResetPinSuccess")
-	public String resetCcPin( @ModelAttribute CardDto CardDto,
+	public String ResetPinSuccess(@Valid @ModelAttribute ("CardDto")CardDto CardDto,BindingResult result,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		System.out.println(CardDto.getCardNumber());
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
-//		}
+		if (result.hasErrors()) {
+			List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+			model.addAttribute("CardDto1", CardDto1);
+			return "ResetCCPin";
+		}
 		CardOutputDto CardOutputDto=this.CreditCardService.resetCcPin(CardDto,id);
 		model.addAttribute("CardOutputDto",CardOutputDto);
 		return "ResetPinSuccess";	
@@ -146,9 +150,29 @@ public class UserController {
 	public String requestCcStatement() {
 		return "RequestCCStatement";	
 	}
-	@RequestMapping("/ccStatementMismatch")
-	public String ccStatementMismatch() {
+	@RequestMapping("/CCStatementMismatch")
+	public String CCStatementMismatch(Model model) {
+		CardDto CardDto = new CardDto();
+		model.addAttribute("CardDto", CardDto);
+		List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+		model.addAttribute("CardDto1", CardDto1);
 		return "CCStatementmismatch";	
+	}
+	@RequestMapping("/ccStatementMismatch_Success")
+	public String ccStatementMismatch_Success(@Valid @ModelAttribute ("CardDto")CardDto CardDto,BindingResult result,
+			 Model model) {
+		Long id = Long.parseLong(getLoggedInUserName());
+		
+		if (result.hasErrors()) {
+			List<CardDto> CardDto1 = this.CreditCardService.CreditCardList(Long.parseLong(getLoggedInUserName()));
+			model.addAttribute("CardDto1", CardDto1);
+			return "ccStatementMismatch";
+		}
+		//String mismatchFile=f.getAbsolutePath();
+		CardOutputDto CardOutputDto=this.CreditCardService.ccStatementMismatch(CardDto,id);
+		if(!(CardOutputDto.getMismatchFile()).isEmpty())
+		model.addAttribute("CardOutputDto",CardOutputDto);
+		return "CCStatementMismatch_Success";	
 	}
 	
 	@RequestMapping("CreditCardUpgrade")
@@ -161,13 +185,13 @@ public class UserController {
 		
 	}
 	@RequestMapping("/CreditCardUpgrade_success")
-	public String CreditCardUpgrade_success( @ModelAttribute CardDto CardDto,
+	public String CreditCardUpgrade_success(@Valid @ModelAttribute ("CardDto")CardDto CardDto,BindingResult result,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		System.out.println(CardDto.getCardNumber());
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
-//		}
+		if (result.hasErrors()) {
+			return "CreditCardUpgrade";
+		}
 		CardOutputDto CardOutputDto=this.CreditCardService.creditCardUpgrade(CardDto,id);
 		model.addAttribute("CardOutputDto",CardOutputDto);
 		return "CreditCardUpgrade_success";	
@@ -183,13 +207,10 @@ public class UserController {
 		
 	}
 	@RequestMapping("/blockUnblockDebitCardsuccess")
-	public String blockUnblockDebitCardsuccess( @ModelAttribute CardDto CardDto,
+	public String blockUnblockDebitCardsuccess(@ModelAttribute ("CardDto")CardDto CardDto,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		System.out.println(CardDto.getCardNumber());
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
-//		}
 		CardOutputDto CardOutputDto=this.DebitCardService.BlockUnblockCard(CardDto,id);
 		model.addAttribute("CardOutputDto",CardOutputDto);
 		return "blockUnblockDebitCardsuccess";	
@@ -205,12 +226,15 @@ public class UserController {
 	}
 	
 	@RequestMapping("/ResetDcPinSuccess")
-	public String resetDcPin( @ModelAttribute CardDto CardDto,
+	public String resetDcPin(@Valid @ModelAttribute ("CardDto")CardDto CardDto,BindingResult result,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		System.out.println(CardDto.getCardNumber());
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
+//		if (result.hasErrors()) 
+//		{		
+//			List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+//			model.addAttribute("CardDto1", CardDto1);
+//			return "ResetDCPin";
 //		}
 		CardOutputDto CardOutputDto=this.DebitCardService.resetDcPin(CardDto,id);
 		model.addAttribute("CardOutputDto",CardOutputDto);
@@ -234,13 +258,15 @@ public class UserController {
 		return "DCStatementmismatch";	
 	}
 	@RequestMapping("/DCStatementMismatch_Success")
-	public String dcStatementMismatch_Success(@ModelAttribute CardDto CardDto,
+	public String dcStatementMismatch_Success(@Valid @ModelAttribute CardDto CardDto,BindingResult result,
 			 Model model) {
 		Long id = Long.parseLong(getLoggedInUserName());
 		
-//		if (result.hasErrors()) {
-//			return "ResetCCPin";
-//		}
+		if (result.hasErrors()) {
+			List<CardDto> CardDto1 = this.DebitCardService.DebitCardList(Long.parseLong(getLoggedInUserName()));
+			model.addAttribute("CardDto1", CardDto1);
+			return "DCStatementmismatch";
+		}
 		CardOutputDto CardOutputDto=this.DebitCardService.dcStatementMismatch(CardDto,id);
 		if(!(CardOutputDto.getMismatchFile()).isEmpty())
 		model.addAttribute("CardOutputDto",CardOutputDto);
