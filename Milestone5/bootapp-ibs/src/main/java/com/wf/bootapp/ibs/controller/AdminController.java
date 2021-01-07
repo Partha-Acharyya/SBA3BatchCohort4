@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wf.bootapp.ibs.dto.CreditCardEligibilityOutputDto;
+import com.wf.bootapp.ibs.dto.Newuseroutput;
 import com.wf.bootapp.ibs.service.CreditCardService;
+import com.wf.bootapp.ibs.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -18,6 +20,9 @@ public class AdminController {
 	
 	@Autowired
 	CreditCardService creditCardService;
+	
+	@Autowired
+	UserService userservice;
 	
 	@RequestMapping("/home")
 	private String home() {
@@ -45,6 +50,22 @@ public class AdminController {
 		model.addAttribute("creditCardEligibilityOutputDto", creditCardEligibilityOutputDto);
 		List<CreditCardEligibilityOutputDto> ccEligibilities= this.creditCardService.getAllCcEligibilities();
 		model.addAttribute("ccEligibilities", ccEligibilities);
+		return "ApproveDeclineCard";
+	}
+	
+	@RequestMapping("/ApproveNewuser")
+	private String approveNewuser(ModelMap model) {
+		List<Newuseroutput> newuser= this.userservice.fetchAllCustomers();
+		model.put("newuser", newuser);
+		return "ApproveDeclineUser";
+	}
+	
+	@RequestMapping("/DeclineUser/{id}")
+	private String Declineuser(@PathVariable Long id,Model model) {
+		Newuseroutput Newuseroutputdto= this.userservice.deleteSingleCustomer(id);
+		model.addAttribute("Newuseroutput", Newuseroutputdto);
+		List<Newuseroutput> newuser= this.userservice.fetchAllCustomers();
+		model.addAttribute("newuser", newuser);
 		return "ApproveDeclineCard";
 	}
 }

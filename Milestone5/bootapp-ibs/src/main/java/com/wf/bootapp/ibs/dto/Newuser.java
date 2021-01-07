@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 
-public class NewUser {
+public class Newuser {
 	@NotBlank(message = "First Name is required!")
 	private String firstName;
 	@NotBlank(message = "Last Name is required!")

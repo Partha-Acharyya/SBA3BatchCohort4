@@ -17,6 +17,7 @@
 	<div align="center">
 		<div class="navbar">
 			<a href="${pageContext.request.contextPath}/admin/home">Home</a>
+			<a href="${pageContext.request.contextPath}/admin/ApproveNewuser">Approve/Decline New Users</a>
 			<div class="dropdown">
 				<button class="dropbtn">
 					Cards <i class="fa fa-caret-down"></i>

@@ -17,6 +17,14 @@ public class Customer {
 	private String location;
 	private String email;
 	private String birthday;
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Long getId() {
 		return id;
 	}

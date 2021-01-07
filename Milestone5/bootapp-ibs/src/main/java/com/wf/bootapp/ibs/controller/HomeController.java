@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wf.bootapp.ibs.dto.CreditCardEligibilityInputDto;
 import com.wf.bootapp.ibs.dto.CreditCardEligibilityOutputDto;
-import com.wf.bootapp.ibs.dto.NewUser;
-import com.wf.bootapp.ibs.dto.NewUserOutput;
+import com.wf.bootapp.ibs.dto.Newuser;
+import com.wf.bootapp.ibs.dto.Newuseroutput;
 import com.wf.bootapp.ibs.service.UserService;
 
 
@@ -51,18 +51,18 @@ public class HomeController {
 
 	@RequestMapping("/newregistration")
 	public String newregistration(Model model) {
-		NewUser Newuser = new NewUser();
+		Newuser Newuser = new Newuser();
 		model.addAttribute("Newuser", Newuser);
 		return "Register";
 	}
 
 	@RequestMapping("/UnregisteredCust")
-	public String UnregisteredCust(@Valid @ModelAttribute NewUser Newuser,
+	public String UnregisteredCust(@Valid @ModelAttribute Newuser Newuser,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "Register";
 		}
-		NewUserOutput newuseroutput= this.Userservice.saveCustomer(Newuser);
+		Newuseroutput newuseroutput= this.Userservice.saveCustomer(Newuser);
 		model.addAttribute("newuseroutputdto", newuseroutput);
 		return "UnregisteredCust";
 	}
