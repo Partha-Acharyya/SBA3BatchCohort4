@@ -21,4 +21,5 @@ public interface UserService {
 	public Newuseroutput fetchSingleCustomer(Long id);
 	public Newuseroutput deleteSingleCustomer(Long id);
 	public Newuseroutput saveCustomer(Newuser newuser);
+	public Newuseroutput updateCustomer(Long id);
 }

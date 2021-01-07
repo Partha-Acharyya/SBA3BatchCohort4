@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private NewUserRepository repository;
 	
-	private Customer convertUserInputDtotoEntity(Newuser usertoregister){
+	private Customer convertnewUserInputDtotoEntity(Newuser usertoregister){
 		Customer newCustomer= new Customer();
 		newCustomer.setBirthday(usertoregister.getBirthday());
 		newCustomer.setCity(usertoregister.getCity());
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
 		newCustomer.setLastName(usertoregister.getLastName());
 		newCustomer.setLocation(usertoregister.getLocation());
 		newCustomer.setMobileNumber(usertoregister.getMobileNumber());
-		
+		newCustomer.setStatus("Un-Registered");
 		return newCustomer;
 	}
 	
@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService{
 		registeruser.setLastName(user.getLastName());
 		registeruser.setLocation(user.getLocation());
 		registeruser.setMobileNumber(user.getMobileNumber());
+		registeruser.setStatus(user.getStatus());
 		
 		return registeruser;
 	}
@@ -65,6 +66,19 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	public Newuseroutput updateCustomer(Long id) {
+		if(this.repository.existsById(id)) {
+			Customer customer = this.repository.findById(id).orElse(null);
+			customer.setPassword("pwd"+id);
+			customer.setStatus("Registered");
+			Customer updatedcustomer = this.repository.save(customer);
+			Newuseroutput updateduseroutput = this.convertUserEntitytoOutputDto(updatedcustomer);
+			return updateduseroutput;
+		}
+		return null;
+	}
+	
+	@Override
 	public Newuseroutput deleteSingleCustomer(Long id) {
 		if(this.repository.existsById(id)) {
 			Newuseroutput user = this.fetchSingleCustomer(id);
@@ -77,10 +91,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Newuseroutput saveCustomer(Newuser newuser) {
 		// convert input dto to entity
-		Customer cust= this.convertUserInputDtotoEntity(newuser);
+		Customer cust= this.convertnewUserInputDtotoEntity(newuser);
 		// save into DB, returns newly added record
 		Customer newcust= this.repository.save(cust);
-		System.out.println(newcust.getCity());
+		//System.out.println(newcust.getCity());
 		// convert entity to dto 
 		Newuseroutput newuseroutput = this.convertUserEntitytoOutputDto(newcust);
 		return newuseroutput;

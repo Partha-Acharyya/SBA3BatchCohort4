@@ -58,6 +58,7 @@
 						<th>Location</th>
 						<th>Email</th>
 						<th>Birthday</th>
+						<th>Status</th>
 						<th colspan="2">Approve/Decline</th>
 					</tr>
 				</thead>
@@ -71,8 +72,9 @@
 						<td>${newuser.location}</td>
 						<td>${newuser.email}</td>
 						<td>${newuser.birthday}</td>
+						<td>${newuser.status}</td>
 						<td><a
-							href="${pageContext.request.contextPath}/admin/ApproveUser/${newuser.referenceID}/${newuser.customerId}">
+							href="${pageContext.request.contextPath}/admin/ApproveUser/${newuser.id}">
 								Approve</a></td>
 						<td><a
 							href="${pageContext.request.contextPath}/admin/DeclineUser/${newuser.id}">

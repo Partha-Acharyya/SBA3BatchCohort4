@@ -53,19 +53,26 @@ public class AdminController {
 		return "ApproveDeclineCard";
 	}
 	
-	@RequestMapping("/ApproveNewuser")
-	private String approveNewuser(ModelMap model) {
+	@RequestMapping("/ApproveDeclineNewuser")
+	private String approvedeclineNewuser(ModelMap model) {
 		List<Newuseroutput> newuser= this.userservice.fetchAllCustomers();
 		model.put("newuser", newuser);
 		return "ApproveDeclineUser";
 	}
-	
+	@RequestMapping("/ApproveUser/{id}")
+	private String ApproveUser(@PathVariable Long id,Model model) {		
+		Newuseroutput Newuseroutputdto= this.userservice.updateCustomer(id);
+		model.addAttribute("Newuseroutputdto", Newuseroutputdto);
+		List<Newuseroutput> newuser= this.userservice.fetchAllCustomers();
+		model.addAttribute("newuser", newuser);
+		return "ApproveDeclineUser";
+	}
 	@RequestMapping("/DeclineUser/{id}")
 	private String Declineuser(@PathVariable Long id,Model model) {
 		Newuseroutput Newuseroutputdto= this.userservice.deleteSingleCustomer(id);
 		model.addAttribute("Newuseroutput", Newuseroutputdto);
 		List<Newuseroutput> newuser= this.userservice.fetchAllCustomers();
 		model.addAttribute("newuser", newuser);
-		return "ApproveDeclineCard";
+		return "ApproveDeclineUser";
 	}
 }
